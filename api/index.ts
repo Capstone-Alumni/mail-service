@@ -104,12 +104,10 @@ app.post(
         });
       });
 
-    for (let i = 0; i < 3; i++) {
-      try {
-        info = await promiseWrapper();
-      } catch (e) {
-        error = e;
-      }
+    try {
+      info = await promiseWrapper().then(res => res).catch(err => console.log(err));
+    } catch (e) {
+      error = e;
     }
 
     info

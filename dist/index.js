@@ -126,13 +126,11 @@ app.post("/mail/send-email", (req, res) => __awaiter(void 0, void 0, void 0, fun
             resolve(info);
         });
     });
-    for (let i = 0; i < 3; i++) {
-        try {
-            info = yield promiseWrapper();
-        }
-        catch (e) {
-            error = e;
-        }
+    try {
+        info = yield promiseWrapper().then(res => res).catch(err => console.log(err));
+    }
+    catch (e) {
+        error = e;
     }
     info
         ? res.status(200).json({ message: "Mail Sent", response: info === null || info === void 0 ? void 0 : info.response })
